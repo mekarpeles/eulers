@@ -14,21 +14,22 @@ def fib(n):
 
 def even(x):
     return not(x % 2)
-    
-def euler_2(n):
-    return fib(n)
 
-if __name__ == "__main__":
+def euluer_2():
     goalp = False
     i = 1
     accum = 0
     tmp = 0
     while not(goalp):
         prev = tmp
-        tmp = euler_2(i)
+        tmp = fib(i)
+        print tmp
         if tmp + prev > 4000000:
             goalp = True
-        elif even(tmp):
+        if not(tmp % 2):
             accum += tmp
         i += 1
-    print accum
+    return accum
+
+if __name__ == "__main__":
+    print euluer_2()
