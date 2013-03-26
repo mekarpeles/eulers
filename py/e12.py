@@ -1,12 +1,15 @@
 from math import sqrt, ceil
+from itertools import product
 
 def triangle_numbers(n):
     return (n*(n+1))/2
 
 def divs(n):
     ds = set()
-    #int(ceil(sqrt(n)))
-    for i in xrange(n, 0, -1):
+    # Heuristic which leverages primality to prune the search space
+    if (n % 2) or (n % 3):
+        return ds
+    for i in xrange(int(ceil(sqrt(n))), 0, -1):
         if not (n % i):
             ds.add(i)
             ds.add(n/i)
@@ -20,19 +23,19 @@ def e12():
     4. First number w/ 500 divisors: 62370000
     triangle_numbers(11169) > 62370000
 
-    Start search @ 11169?
-
     5. first # > 501 divisors: 841824943102600080885322463644579019321817144754176
+
+    SOLUTION! 20736
     """
-    i = 8900
+    i = 1
     tn = triangle_numbers(i)
     ds = divs(tn)
     while len(ds) < 501:
         tn = triangle_numbers(i)
         ds = divs(tn)
-        print i, tn, ds
+        print tn, len(ds)
         i += 1
-    return i
+    return i, tn
 
 if __name__ == "__main__":
     print e12()
