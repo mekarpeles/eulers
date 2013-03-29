@@ -1,7 +1,7 @@
-(defn collatz [n accum]
-  (if (= n 1)
-    (reverse (cons 1 accum))
-    (if (mod n 2)
-      (let [a (+ (* 3 n) 1)] (collatz a (cons a accum))
-      (let [b (/ n 2)] (collatz b (cons b accum)))))))
-(collatz 5 '())
+(defn collatz [n]
+  (let [x (first n)]
+    (if (= x 1)
+      (reverse n)
+      (if (= (mod x 2) 0)
+	(let [even (/ x 2)] (collatz (cons even n)))
+	(let [odd (+ (* 3 x) 1)] (collatz (cons odd n)))))))
