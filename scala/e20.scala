@@ -65,7 +65,7 @@ def digify(num: BigInt) = {
 
 object E20 {
   def main(args: Array[String]) {
-    println(digify(100!))
+    println(digify(100!) map { _.toString } map { Integer.parseInt } sum)
   } 
 }
 
