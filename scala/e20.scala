@@ -2,29 +2,6 @@
 
 case class Docstring(s: String) extends scala.annotation.Annotation
 
-implicit def string2BigInt(s: String): BigInt = augmentString(s).toInt
-def atoi(i: BigInt) = { 
-  Docstring("""
-  Consumes a string as if it were an int (via the implicit string2Int definition)
-  and returns this string as if it were an int, effectively invoking its .toInt
-  function.
-
-  usage:
-  scala> atoi("3")
-  Int = 3
-  """)
-  try {
-    i
-  } catch {
-    case ene: NumberFormatException => {
-      println("Input must be the string representation of a number")
-    }
-    case e: Exception => {
-      println("Invalid input to atoi")
-    }
-  }
-}
-
 def factorial(n: Int): BigInt = {
   Docstring("""
   Consumes an integer n and returns the n!, i.e. n factorial, 
@@ -58,7 +35,6 @@ def sum(args: Int*) = {
 
 def digify(num: BigInt) = {
   Docstring("""Expands/splits an integer into a List[Int] of digits""")
-  //"%s".format(num).split("").slice(1, -1).map(a => atoi(a))
   if (num == 0) List(0) else 
     (Stream.iterate(num)(_/10)takeWhile(_!=0)map(_%10)toList) reverse
 }
